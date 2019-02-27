@@ -1,12 +1,14 @@
+#include "opp_class.h"
 #include <iostream> // include iostream file. (pre-defined input/output functions )
 #include <cmath>
-
+#include <vector>
 
 /*
  * https://beginnersbook.com/2017/08/c-plus-plus-tutorial-for-beginners/
  */
 
 // namespace
+using namespace T;
 using namespace std;
 
 // global variables
@@ -24,7 +26,7 @@ char myFunc(char gVar = 'B') {
  *          ...
  *      }
  *
- *      if defining func before main(), no need to do func declaration;
+ *      if defining func before main(), no need to do declaration;
  *      if defining after main(), have to declare the function first!
  */
 
@@ -168,6 +170,7 @@ int main() {
      *       for (init; condition; increment/decrement) {
      *          ...
      *       }
+     *       NOTE: It's possible to omit any or all the expressions, but should keep the ";"!
      *
      *    b. while loop
      *       init;
@@ -185,6 +188,9 @@ int main() {
      *
      *    e. goto (don't use this one)
      *
+     *    f. range based for loop
+     *      for (range_declaration : range_expression) loop_statement
+     *
      */
 
     /* 10) Multidimensional arrary
@@ -198,6 +204,25 @@ int main() {
     //int marr[2][3] = {10, 11, 12, 13, 14, 15};
     int marr[2][3] = {{10, 11, 12}, {13, 14, 15}}; // both ways work
 
+    std::vector<int> v1;
+    std::vector<int> v2 = {1,2,3,4};
+
+    v2[1] = 3;
+    v2[4] = 2;                                              // vector not automatically resize!
+    cout << "The length of v2 is: " << v2.size() << endl;
+    cout << "The capacity of v2 is: " << v2.capacity() << endl;
+    for (auto const &i: v2)
+        cout << i << " ";
+    cout << endl;
+
+    v2.resize(10);                                           // resize by hand, resize will add 0s
+    v2[4] = 2;
+    cout << "The length of v2 is: " << v2.size() << endl;
+    cout << "The capacity of v2 is: " << v2.capacity() << endl;
+    for (auto const &i: v2)
+        cout << i << " ";
+    cout << endl;
+
 
 
     cout << "for loop" << endl;
@@ -208,9 +233,7 @@ int main() {
     cout << "while loop" << endl;
     i = 0;
     while (i < 5) {
-
         cout << arr[i] << endl;
-
         i += 1;
     }
 
@@ -218,13 +241,10 @@ int main() {
     i = 0;
     do {
         cout << arr[i] << endl;
-
         i += 1;
     } while (i < 3);
-
     cout << "What if you print something not in the array?" << endl;
     cout << arr[6] << endl;
-
 
     cout << "nested for loop to show elements in a 2D array" << endl;
     for (int i=0; i<2; i++){
@@ -257,7 +277,7 @@ int main() {
 
     /* 11) Pointer
     *   data_type *pointer_name, var; // declear
-    *   *pointer_name = &var;         // assignment the address of var to the pointer
+    *   *pointer_name = &var;         // assign the address of var to the pointer
     *
     *   Pointer is much useful when combine with array.
     */
@@ -278,12 +298,44 @@ int main() {
     };
 
 
+    /*
+     * 12) class
+     */
+    Demo obj;                           //init the obj with class Demo
+    obj.displayValues();
+    obj.setMyValues(23, 'A');
+    obj.displayValues();
+    cout << obj.getNum() << endl;
+    cout << obj.getChar() << endl;
+
+
+    Math1 calc;
+    cout << "The add up of " << num1 << " and " << num8 << " is: " << calc.ADD(num1, num8) << endl;
+    cout << "The times of " << num1 << " and " << num8 << " is: " << calc.MULTIPLY(num1, num8) << endl;
+    cout << "The sum of " << num1 << " and " << num8 << " and 23 is: " << calc.SUM(num1, num8, 23) << endl;
+
+    RGB s1, s2;
+    s1.r = 20;
+    s1.g = 100;
+    cout << "Struct s1: " << s1.r << " " << s1.g << " " << s1.b << endl;
+
+    RGB s3 = setRGB(11, 32, 34);
+    printRGB(s2);
+    printRGB(s3);
+
+    // enumeration
+    direction dir;
+    dir = South;
+    cout << "The direction is: " << dir << "\n";
+
+
+
     return 0; // 0 successful, 1 failed
 }
 
 
 // Defining the function sum
- int sum(int num1, int num2) {
+int sum(int num1, int num2) {
     return num1 + num2;
- }
+}
 
