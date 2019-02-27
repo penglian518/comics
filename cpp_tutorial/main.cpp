@@ -1,4 +1,6 @@
 #include <iostream> // include iostream file. (pre-defined input/output functions )
+#include <cmath>
+
 
 /*
  * https://beginnersbook.com/2017/08/c-plus-plus-tutorial-for-beginners/
@@ -11,8 +13,8 @@ using namespace std;
 char gVar = 'A';
 
 
-char myFunc() {
-    char gVar = 'B';
+char myFunc(char gVar = 'B') {
+    //char gVar = 'B';
     return gVar;
 }
 
@@ -22,11 +24,21 @@ char myFunc() {
  *          ...
  *      }
  *
- *      when define func before main(), no need to do func declaration;
- *      when after main(), have to declare the function first
+ *      if defining func before main(), no need to do func declaration;
+ *      if defining after main(), have to declare the function first!
  */
 
+// Declearing the function sum
+int sum(int, int);
 
+// Factorial function for testing recursive function
+int factorial(int n){
+    if (n<=1){
+        return 1;
+    } else {
+        return n * factorial(n-1);
+    }
+}
 
 
 // the main function. 'int' means it will return an integer. That's why should return 0 at the end.
@@ -36,7 +48,7 @@ int main() {
     cout << "Global variables: " << gVar << endl;
     char gVar = 'Z';
     cout << "Changed global variables: " << gVar << endl;
-    cout << "Changed global variables by functions: " << myFunc() << endl;
+    cout << "Changed global variables by functions: " << myFunc('C') << endl;
 
 
     /* 1) declaring variables
@@ -175,7 +187,18 @@ int main() {
      *
      */
 
+    /* 10) Multidimensional arrary
+    *   int arr[2][3];    // 2*3 elements, 2 rows, 3 columns
+    */
+
+    // declear an array, with/without array size are OK.
     int arr[] = {21, 9, 10, 99, 201};
+    //int arr[5] = {21, 9, 10, 99, 201};
+
+    //int marr[2][3] = {10, 11, 12, 13, 14, 15};
+    int marr[2][3] = {{10, 11, 12}, {13, 14, 15}}; // both ways work
+
+
 
     cout << "for loop" << endl;
     for (int i=0; i<5; i++) {
@@ -199,11 +222,68 @@ int main() {
         i += 1;
     } while (i < 3);
 
-
     cout << "What if you print something not in the array?" << endl;
     cout << arr[6] << endl;
 
 
+    cout << "nested for loop to show elements in a 2D array" << endl;
+    for (int i=0; i<2; i++){
+        for (int j=0; j<3; j++){
+            cout << "marr["<<i<<"]["<<j<<"]:" <<marr[i][j]<<endl;
+        }
+    }
+
+
+    // call functions
+    cout << "Sum of int (2,5): " << sum(2, 5) << endl;
+    cout << "Call functions in cmath pow(2,10): " << pow(2, 10) << endl;
+
+    // recursive function
+    int num8;
+    //cout << "Enter a number: ";
+    //cin >> num8;
+    num8 = 5;
+    cout << "Factorial of entered number: " << factorial(num8);
+
+
+    // String object
+    string str = "This is a string";
+    str.push_back('!');
+    cout << "init string: " << str << endl;
+    cout << "String with PUSH back (!):" << str << endl;
+    str.pop_back();
+    cout << "String with POP back (!):" << str << endl;
+
+
+    /* 11) Pointer
+    *   data_type *pointer_name, var; // declear
+    *   *pointer_name = &var;         // assignment the address of var to the pointer
+    *
+    *   Pointer is much useful when combine with array.
+    */
+    int *p, var=101;
+    p = &var;   // if var is an array, just use p = var;
+    cout << "Address of var: " << &var << endl;
+    cout << "Address of var: " << p << endl;
+    cout << "Address of p: " << &p << endl;
+    cout << "Value of p: " << *p << endl;
+
+    // Traversing the array using pointers
+    int *pa;
+    int arr1[5] = {1,2,3,4,5};
+    pa = arr1; // assignment the address of the array to the pointer.
+    for (int i=0; i<5; i++) {
+        cout << "arr1[" <<i<< "] = " << *pa << endl;
+        pa++;
+    };
+
 
     return 0; // 0 successful, 1 failed
 }
+
+
+// Defining the function sum
+ int sum(int num1, int num2) {
+    return num1 + num2;
+ }
+
