@@ -93,3 +93,29 @@ void T::printRGB(RGB s1){
     cout << "printRGB: " << s1.r << " " << s1.g << " " << s1.b << endl;
 };
 
+// constructor of display
+display::display(){
+}
+
+void display::show(std::vector<int> l){
+    for (auto const i : l) cout << i << " ";
+    cout << endl;
+}
+
+void display::show(std::deque<int> l){
+    for (auto const i : l) cout << i << " ";
+    cout << endl;
+}
+
+void display::show(std::list<int> l){
+    for (auto const i : l) cout << i << " ";
+    cout << endl;
+}
+
+void display::show(std::map<std::string, std::string> l){
+    //for (auto const i : l) cout << i << " ";
+    for (std::map<string, string>::iterator it = l.begin(); it != l.end(); it++ ){
+        cout << it->first << " : " << it->second << endl;
+    }
+}
+

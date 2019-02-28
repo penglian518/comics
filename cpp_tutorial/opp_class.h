@@ -5,6 +5,11 @@
 #ifndef UNTITLED_OPP_CLASS_H
 #define UNTITLED_OPP_CLASS_H
 
+#include <vector>
+#include <deque>
+#include <list>
+#include <map>
+
 namespace T {
 
     // class Demo
@@ -25,8 +30,6 @@ namespace T {
         // destructor of Demo
         ~Demo();
     };
-
-
 
     // class Math
     class Math {
@@ -74,6 +77,16 @@ namespace T {
 
     // enumeration
     enum direction {East, West, North, South};
+
+
+    class display{
+    public:
+        display();
+        void show(std::vector<int> l);
+        void show(std::deque<int> l);
+        void show(std::list<int> l);
+        void show(std::map<std::string, std::string> l);
+    };
 
 }
 #endif //UNTITLED_OPP_CLASS_H

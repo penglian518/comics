@@ -2,6 +2,10 @@
 #include <iostream> // include iostream file. (pre-defined input/output functions )
 #include <cmath>
 #include <vector>
+#include <deque>
+#include <list>
+#include <map>
+
 
 /*
  * https://beginnersbook.com/2017/08/c-plus-plus-tutorial-for-beginners/
@@ -204,27 +208,112 @@ int main() {
     //int marr[2][3] = {10, 11, 12, 13, 14, 15};
     int marr[2][3] = {{10, 11, 12}, {13, 14, 15}}; // both ways work
 
+    // vector
+    cout << "\n...............Test for std::vector...............\n";
+
+    display prt;                                            // use homemade func to show the variables
+
     std::vector<int> v1;
-    std::vector<int> v2 = {1,2,3,4};
+    std::vector<int> v2 = {1,2,3,4};                        // init vector
+
+    cout << "The original v2 is: " << endl;
+    //for (auto const &i : v2) cout << i << " ";              // iterate with range based for loop
+    //cout << endl;
+    prt.show(v2);
+
+    int head = v2.front();                                  // 1st element
+    int tail = v2.back();                                   // last element
+
+    v2.insert(v2.begin(), 0);                               // insert to head
+    v2.insert(v2.begin()+3, 7);                             // insert to 4th position
+    v2.push_back(8);                                        // insert to back
+    cout << "After insert at begin and push back: " << endl;
+    //for (auto const &i : v2) cout << i << " ";              // iterate with range based for loop
+    //cout << endl;
+    prt.show(v2);
+
+    v2.erase(v2.begin()+3);                                 // erase 4th element
+    v2.pop_back();                                          // erase last element
+    //for (std::vector<int>::iterator it = v2.begin(); it != v2.end(); it++){ // iterate with iterator
+    //    cout << *it << " ";
+    //}
+    //cout << endl;
+    prt.show(v2);
+
 
     v2[1] = 3;
     v2[4] = 2;                                              // vector not automatically resize!
     cout << "The length of v2 is: " << v2.size() << endl;
     cout << "The capacity of v2 is: " << v2.capacity() << endl;
-    for (auto const &i: v2)
-        cout << i << " ";
-    cout << endl;
+    //for (auto const &i: v2)
+    //    cout << i << " ";
+    //cout << endl;
+    prt.show(v2);
 
     v2.resize(10);                                           // resize by hand, resize will add 0s
     v2[4] = 2;
     cout << "The length of v2 is: " << v2.size() << endl;
     cout << "The capacity of v2 is: " << v2.capacity() << endl;
-    for (auto const &i: v2)
-        cout << i << " ";
-    cout << endl;
+    //for (auto const &i: v2)
+    //    cout << i << " ";
+    //cout << endl;
+    prt.show(v2);
+
+    // Deque (Double end queue)
+    cout << "\n...............Test for std::deque...............\n";
+    std::deque<int> d = {1,2,3,4};
+    d.push_front(0);                                         //similar to vector, but has push_front
+    d.push_front(1);                                         // and pop_front
+    d.pop_front();
+    d.insert(d.begin()+3, 9);
+    //for (auto const &i : d) cout << i << " ";
+    //cout << endl;
+    prt.show(d);
 
 
+    // list
+    cout << "\n...............Test for std::list...............\n";
+    std::list<int> l = {1,3,3,3,2,4};
+    std::list<int> l2 = {9,7,8,5,3,2,1, 11};
+    l.push_front(0);                                        // insert head
+    //l.insert(l.begin()+3, 8);                               // insert to 4th
+    l.push_back(9);                                         // intert to tail
+    prt.show(l);
+    l.erase(l.begin());
+    //l.splice(l.begin(), l2);
+    //cout << "after splice:\n";
+    //prt.show(l);
+    l.remove(9);
+    cout << "after remove 9:\n";
+    prt.show(l);
+    l.merge(l2);
+    cout << "after merge l2:\n";
+    prt.show(l);
+    l.sort();
+    cout << "after sort:\n";
+    prt.show(l);
+    l.unique();                                             //unique doesn't work, when after merge??
+    cout << "after unique:\n";
+    prt.show(l);
+    l.reverse();
+    cout << "after reverse:\n";
+    prt.show(l);
 
+    // map
+    cout << "\n...............Test for std::map...............\n";
+    std::map<string, string> m;
+    m.insert(pair<string, string>("key1", "value1"));       // insert string pair to map
+    m["k2"] = "v2";
+    string value = m.at("key1");                            // get the values of key1
+    cout << "the value at key1 is: " << value << endl;
+    prt.show(m);
+    m.erase("key1");                                        // erase key1, value1
+    prt.show(m);
+    bool exists = (m.find("key1") != m.end());              // find if an element exist
+    cout << exists << endl;
+
+
+    cout << "\n...............Test for loops...............\n";
     cout << "for loop" << endl;
     for (int i=0; i<5; i++) {
         cout << arr[i] << endl;
