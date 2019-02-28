@@ -9,6 +9,8 @@
 #include <deque>
 #include <list>
 #include <map>
+#include <set>
+
 
 namespace T {
 
@@ -86,7 +88,27 @@ namespace T {
         void show(std::deque<int> l);
         void show(std::list<int> l);
         void show(std::map<std::string, std::string> l);
+        void show(std::set<int> l);
     };
+
+
+
+
+    // for eight queens problem
+    class eightQ{
+    private:
+        int COL[8] = {0,0,0,0,0,0,0,0};
+        int ROW[8] = {0,0,0,0,0,0,0,0};
+    public:
+        eightQ();   // constructor
+        void showSolution();
+        bool position(int r, int c);
+        void findSolutions();
+
+    };
+
+
+
 
 }
 #endif //UNTITLED_OPP_CLASS_H

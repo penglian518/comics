@@ -119,3 +119,69 @@ void display::show(std::map<std::string, std::string> l){
     }
 }
 
+void display::show(std::set<int> l){
+    for (auto const i : l) cout << i << " ";
+    cout << endl;
+}
+
+
+// for eight queens problem
+eightQ::eightQ(){
+    // constructor
+}
+
+void eightQ::showSolution() {
+    for (int i=0; i<8; i++){
+        printf("Occupied postions are: %d, %d\n", ROW[i], COL[i]);
+    }
+}
+
+bool eightQ::position(int r, int c) {
+    // given (r,c) return if it is ok to place a queen here
+
+    bool placeable = false;
+
+    // scan all queen
+    for (int i=0; i<8; i++){
+        int R = ROW[i];
+        int C = COL[i];
+
+        if (r==R || c ==C ) {
+            placeable = false;
+        } else if (abs(r-R)==abs(c-C)) {
+            placeable =  false;
+        } else {
+            placeable = true;
+        }
+
+        //printf("%d: (%d, %d), (%d, %d), %d\n", i, R, C, r, c, placeable);
+
+    }
+
+    return placeable;
+}
+
+void eightQ::findSolutions() {
+    // scan all queen
+    for (int q=1; q<8; q++) {
+
+        bool placeable = false;
+        int stoploop = 0;
+
+        // scan all positions
+        for (int i = 0; i < 8 and stoploop == 0; i++) {
+            for (int j = 0; j < 8; j++) {
+                placeable = this->position(i,j);
+
+                if (placeable == true){
+                    printf("%d, %d is ok for queen %d\n", i,j,q);
+                    stoploop = 1;
+                    break;
+                }
+
+            }
+        }
+
+    }
+
+}

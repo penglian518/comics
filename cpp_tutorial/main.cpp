@@ -5,7 +5,9 @@
 #include <deque>
 #include <list>
 #include <map>
-
+#include <set>
+#include <stack>
+#include <queue>
 
 /*
  * https://beginnersbook.com/2017/08/c-plus-plus-tutorial-for-beginners/
@@ -313,6 +315,41 @@ int main() {
     cout << exists << endl;
 
 
+    // set
+    cout << "\n...............Test for std::set...............\n";
+    std::set<int> s = {1,3,3,3,2,4};
+    s.insert(20);                                        // insert
+    prt.show(s);
+
+    s.erase(3);
+    prt.show(s);
+    exists = (s.find(21) != s.end());
+    cout << "21 is in s? " << exists << endl;
+
+    // stack    First-in Last-out !
+    cout << "\n...............Test for std::stack...............\n";
+    std::stack<int> st;
+    st.push(19);                                        // insert
+    st.push(20);                                        // insert
+    st.push(21);                                        // insert
+    st.pop();                                           // pop the last one
+
+    cout << "The size of the stack is: " << st.size() << endl;
+    cout << "The top of the stack is: " << st.top() << endl;
+
+    // queue    First-in First-out!
+    cout << "\n...............Test for std::queue...............\n";
+    std::queue<int> q;
+    q.push(19);                                        // insert
+    q.push(20);                                        // insert
+    q.push(21);                                        // insert
+    q.pop();                                           // pop the first one
+
+    cout << "The size of the queue is: " << q.size() << endl;
+    cout << "The head of the queue is: " << q.front() << endl;
+    cout << "The tail of the queue is: " << q.back() << endl;
+
+
     cout << "\n...............Test for loops...............\n";
     cout << "for loop" << endl;
     for (int i=0; i<5; i++) {
@@ -417,7 +454,15 @@ int main() {
     dir = South;
     cout << "The direction is: " << dir << "\n";
 
+    printf("The direction is: %s, %d\n", "a", num1);
 
+
+    // eight queens problem
+
+    eightQ obj2;
+    obj2.showSolution();
+    obj2.position(1,2);
+    obj2.findSolutions();
 
     return 0; // 0 successful, 1 failed
 }
