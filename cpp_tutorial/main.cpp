@@ -458,10 +458,7 @@ int main() {
 
 
     // eight queens problem
-
     eightQ obj2;
-    obj2.showSolution();
-    obj2.position(1,2);
     obj2.findSolutions();
 
     return 0; // 0 successful, 1 failed

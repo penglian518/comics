@@ -132,56 +132,108 @@ eightQ::eightQ(){
 
 void eightQ::showSolution() {
     for (int i=0; i<8; i++){
-        printf("Occupied postions are: %d, %d\n", ROW[i], COL[i]);
+        printf("Occupied postions are: %d, %d\n", this->ROW[i], this->COL[i]);
     }
 }
 
-bool eightQ::position(int r, int c) {
-    // given (r,c) return if it is ok to place a queen here
+bool eightQ::testSolution(int col[8], int row[8]){
+    // given a solution, test it is validate or not
+    int results[8] = {};
+    bool pass = false;
 
-    bool placeable = false;
-
-    // scan all queen
     for (int i=0; i<8; i++){
-        int R = ROW[i];
-        int C = COL[i];
+        int c = col[i];
+        int r = row[i];
 
-        if (r==R || c ==C ) {
-            placeable = false;
-        } else if (abs(r-R)==abs(c-C)) {
-            placeable =  false;
-        } else {
-            placeable = true;
-        }
-
-        //printf("%d: (%d, %d), (%d, %d), %d\n", i, R, C, r, c, placeable);
-
-    }
-
-    return placeable;
-}
-
-void eightQ::findSolutions() {
-    // scan all queen
-    for (int q=1; q<8; q++) {
-
-        bool placeable = false;
-        int stoploop = 0;
-
-        // scan all positions
-        for (int i = 0; i < 8 and stoploop == 0; i++) {
-            for (int j = 0; j < 8; j++) {
-                placeable = this->position(i,j);
-
-                if (placeable == true){
-                    printf("%d, %d is ok for queen %d\n", i,j,q);
-                    stoploop = 1;
+        // check against other queens
+        int check[8] = {};
+        for (int j=0; j<8; j++){
+            if (j!=i){
+                if (c==col[j]||r==row[j]||abs(c-col[j])==abs(r-row[j])){
+                    //pass = false;
+                    check[j] = 0;
                     break;
+                } else {
+                    //pass = true;
+                    check[j] = 1;
                 }
-
             }
         }
 
+        // sum the results
+        int Rc=0;
+        for (auto i: check) Rc+=i;
+
+        // if no confict with others, this queen is ok.
+        if (Rc==7){
+        results[i] = 1;
+        } else {
+        results[i] = 0;
+        }
     }
 
+
+    // sum the results
+    int R=0;
+    for (int i=0; i<8; i++){
+        R += results[i];
+    }
+
+    // if all queens are no confictions, this solution is ok.
+    if (R==8){
+        return true;
+    } else {
+        return false;
+    }
 }
+
+void eightQ::findSolutions(){
+    // init the columns
+    for (int i=0; i<8; i++){
+        this->COL[i] = i;
+    }
+
+    printf("All the solutions for 8 Queens problem are:\n");
+
+    // generate all the possible solutions.
+    for (int i0=0; i0<8; i0++){
+    for (int i1=0; i1<8; i1++){
+    for (int i2=0; i2<8; i2++){
+    for (int i3=0; i3<8; i3++){
+    for (int i4=0; i4<8; i4++){
+    for (int i5=0; i5<8; i5++){
+    for (int i6=0; i6<8; i6++){
+    for (int i7=0; i7<8; i7++){
+        this->ROW[0] = i0;
+        this->ROW[1] = i1;
+        this->ROW[2] = i2;
+        this->ROW[3] = i3;
+        this->ROW[4] = i4;
+        this->ROW[5] = i5;
+        this->ROW[6] = i6;
+        this->ROW[7] = i7;
+
+        if (this->testSolution(this->COL, this->ROW)){
+            printf("%d,%d,%d,%d,%d,%d,%d,%d\n",ROW[0],ROW[1],ROW[2],ROW[3],ROW[4],ROW[5],ROW[6],ROW[7]);
+        }
+    }
+    }
+    }
+    }
+    }
+    }
+    }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+

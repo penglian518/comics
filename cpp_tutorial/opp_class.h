@@ -97,12 +97,12 @@ namespace T {
     // for eight queens problem
     class eightQ{
     private:
-        int COL[8] = {0,0,0,0,0,0,0,0};
-        int ROW[8] = {0,0,0,0,0,0,0,0};
+        int COL[8] = {};
+        int ROW[8] = {};
     public:
         eightQ();   // constructor
         void showSolution();
-        bool position(int r, int c);
+        bool testSolution(int col[8], int row[8]);
         void findSolutions();
 
     };
