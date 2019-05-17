@@ -7,7 +7,6 @@ Step 1. load the modules
     module load mkl/2017
     module load scalapack/2.0.2
 
-    # these are default modules in my environment.
     module load gcc/5.3.0
     module load openmpi/2.1.1
     module load xalt/0.7.6
