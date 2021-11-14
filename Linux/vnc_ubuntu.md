@@ -6,7 +6,7 @@
     
     vncpasswd
     vncserver -list
-    vncserver :1
+    vncserver -localhost no :1
     vncserver -kill :1
     
 ## Configure the VNC Server
