@@ -62,6 +62,25 @@ Start the service
     sudo systemctl status vncserver@1
 
 
+## Fix the "Authentication is required to create a color profile" issue
+
+Create a new config file and reboot
+
+    sudo vi /etc/polkit-1/localauthority.conf.d/02-allow-colord.conf
+    
+    polkit.addRule(function(action, subject) {
+     if ((action.id == "org.freedesktop.color-manager.create-device" ||
+     action.id == "org.freedesktop.color-manager.create-profile" ||
+     action.id == "org.freedesktop.color-manager.delete-device" ||
+     action.id == "org.freedesktop.color-manager.delete-profile" ||
+     action.id == "org.freedesktop.color-manager.modify-device" ||
+     action.id == "org.freedesktop.color-manager.modify-profile") &&
+     subject.isInGroup("{users}")) {
+     return polkit.Result.YES;
+     }
+    });
+    
+
 # Reference
 https://www.sproutworkshop.com/2021/04/how-to-create-a-virtual-headless-tigervnc-server-on-ubuntu-20-04/
-
+https://devanswers.co/how-to-fix-authentication-is-required-to-create-a-color-profile-managed-device-on-ubuntu-20-04-20-10/
